@@ -23,7 +23,7 @@ defmodule ThousandIsland.Acceptor do
       child_spec: {server_config.handler_module, {self(), listener_socket, server_config}}
     }
 
-    for _ <- 1..10, do: GenServer.cast(self(), :new)
+    for _ <- 1..server_config.num_acceptors, do: GenServer.cast(self(), :new)
 
     {:noreply, state}
   end
